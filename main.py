@@ -57,7 +57,7 @@ class Bot:
                     continue # Skip and continue the loop if empty.
 
                 print('>> '+line)
-                # Now line is a full line, this one we also need to split by list so we can read word by word.
+                # Now line is a full line, this one we also need to split to list so we can read word by word.
                 data = line.split() # We must use different variable names, to prevent conflicts.
 
                 # Let's reply to PING here. We can hardcode it since it is required to keep the connection alive.
