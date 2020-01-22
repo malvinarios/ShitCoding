@@ -64,7 +64,6 @@ class Bot:
                     self.raw('PONG '+('*' if len(data) == 1 else data[1]))
                     # We use a ternary operator to prevent IndexError.
 
-
                 # Now we can respond to a PING command. But only if the length of data is 2 or higher.
                 if len(data) >= 2:
                     # Now we can handle other data.
