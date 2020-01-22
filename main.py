@@ -37,7 +37,7 @@ class Bot:
         except:
             pass
         self.sock.close()
-        print('Socket gracefully closed.')
+        print('Socket closed gracefully.')
 
     def listen(self):
         # Here we will read the socket.
@@ -48,19 +48,34 @@ class Bot:
                 self.disconnect()
                 return
 
-            print(recv) # Let's print out all the incoming data, we can work with this later.
-
             # Let's do something with recv. It is a string now, so hard to read. Let's make it a list.
             # We should not forget to split it by newline! Remember, servers can send multiple lines at once.
             for line in recv.split('\n'):
-                # Now line is a full line, this one we also need to split by list so we can read word by word.
-                print(line)
+
+                # Make sure line isn't empty.
+                if not line:
+                    continue # Skip and continue the loop if empty.
+
+                print('>> '+line)
+                # Now line is a full line, this one we also need to split to list so we can read word by word.
                 data = line.split() # We must use different variable names, to prevent conflicts.
-                # Now we can respond to a PING command. But only if the length of data is 2 or higher.
+
+                # Let's reply to PING here. We can hardcode it since it is required to keep the connection alive.
+                if data[0] == "PING":
+                    self.raw('PONG '+('*' if len(data) == 1 else data[1]))
+                    # We use a ternary operator to prevent IndexError.
+
+                # Now we can respond to other events. But only if the length of data is 2 or higher.
                 if len(data) >= 2:
-                    if data[0] == 'PING':
-                        self.raw('PONG '+data[1]) # Reply with the same random string as you received.
-                        print('Replied to PING command from server. We should be connected now.')
+                    # Example:      :irc.example.org 001 <nickname> :Welcome to the <network> IRC Network <your info>
+                    # Example:      :nick!ident@host PRIVMSG #Home :sup
+                    if data[1].isdigit():
+                        # data[1] is a number, so we have a RAW event. Indexes start at 0.
+                        if data[1] == '001':
+                            print('='*50)
+                            print('Successfully connected to the IRC server.')
+                            print('='*50)
+
 
             time.sleep(0.1) # Temporary solution.
 
