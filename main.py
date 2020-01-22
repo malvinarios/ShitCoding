@@ -1,5 +1,3 @@
-print('Sup world!')
-
 import socket
 
 class Bot:
