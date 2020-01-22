@@ -12,11 +12,11 @@ class Bot:
         self.port = 6667
         self.nick = "ShitCodedBot"
         self.ident = "shit"
-        self.sock = socket.socket()
+        self.sock = socket.socket() # We assign a new socket object to this class' sock attribute. (self.sock)
         self.read = 0
 
     def run(self):
-        self.sock.connect((self.server, self.port))
+        self.sock.connect((self.server, self.port)) # A socket object takes a tuple as argument, so don't be alarmed by the double parenthesis around the insertion.
         print('Connected')
         self.read = 1
         self.reg_client()
@@ -56,7 +56,7 @@ class Bot:
                 # Now line is a full line, this one we also need to split by list so we can read word by word.
                 print(line)
                 data = line.split() # We must use different variable names, to prevent conflicts.
-                # Now we can respond to a PING command. But only if the length of recv is 2 or higher.
+                # Now we can respond to a PING command. But only if the length of data is 2 or higher.
                 if len(data) >= 2:
                     if data[0] == 'PING':
                         self.raw('PONG '+data[1]) # Reply with the same random string as you received.
