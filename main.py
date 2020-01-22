@@ -37,7 +37,7 @@ class Bot:
         except:
             pass
         self.sock.close()
-        print('Socket gracefully closed.')
+        print('Socket closed gracefully.')
 
     def listen(self):
         # Here we will read the socket.
@@ -51,13 +51,14 @@ class Bot:
             # Let's do something with recv. It is a string now, so hard to read. Let's make it a list.
             # We should not forget to split it by newline! Remember, servers can send multiple lines at once.
             for line in recv.split('\n'):
-                print(line)
-                # Now line is a full line, this one we also need to split by list so we can read word by word.
-                data = line.split() # We must use different variable names, to prevent conflicts.
 
                 # Make sure line isn't empty.
                 if not line:
                     continue # Skip and continue the loop if empty.
+
+                print('>> '+line)
+                # Now line is a full line, this one we also need to split by list so we can read word by word.
+                data = line.split() # We must use different variable names, to prevent conflicts.
 
                 # Let's reply to PING here. We can hardcode it since it is required to keep the connection alive.
                 if data[0] == "PING":
