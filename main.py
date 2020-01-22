@@ -1,4 +1,9 @@
+print('Sup world!')
+
 import socket
+
+for _ in range(1, 11):
+  print("Go nuts {} time{}".format(_, 's' if _ != 1 else ''))
 
 class Bot:
     def __init__(self):
