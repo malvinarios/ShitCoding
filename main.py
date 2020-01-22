@@ -64,9 +64,8 @@ class Bot:
                     self.raw('PONG '+('*' if len(data) == 1 else data[1]))
                     # We use a ternary operator to prevent IndexError.
 
-                # Now we can respond to a PING command. But only if the length of data is 2 or higher.
+                # Now we can respond to other events. But only if the length of data is 2 or higher.
                 if len(data) >= 2:
-                    # Now we can handle other data.
                     # Example:      :irc.example.org 001 <nickname> :Welcome to the <network> IRC Network <your info>
                     # Example:      :nick!ident@host PRIVMSG #Home :sup
                     if data[1].isdigit():
