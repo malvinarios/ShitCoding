@@ -27,7 +27,7 @@ class Bot:
         self.raw(f'USER {self.ident} 0 0 :Shit bot')
 
     def raw(self, data):
-        self.sock.send(bytes(data, 'utf-8'))
+        self.sock.send(bytes(data+'\n', 'utf-8'))
 
     def disconnect(self):
         self.read = 0
