@@ -19,8 +19,8 @@ class Bot:
         self.reg_client()
 
     def reg_client(self):
-        self.raw('NICK '+self.nick)
-        self.raw('USER {} 0 0 :Shit bot'.format(self.ident))
+        self.raw(f'NICK {self.nick}')
+        self.raw(f'USER {self.ident} 0 0 :Shit bot')
 
     def raw(self, data):
         self.sock.send(bytes(data, 'utf-8'))
